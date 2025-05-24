@@ -1,3 +1,10 @@
+## Dataset 
+
+The dataset for GenCAD can be downloaded from [here](https://drive.google.com/drive/folders/1M0dPr5kILGY9HTRCHox1vLLDhhxJWl_C?usp=sharing) and place it in the data directory. 
+
+## Pretrained models
+
+Pretrained models can be found [here](https://drive.google.com/drive/folders/1Ej7wdtlqT5P-SoUf3gsZXD8b78XqhiI5?usp=sharing) and should be placed in the `data/ckpt` directory. 
 
 ## Training the CSR model 
 
