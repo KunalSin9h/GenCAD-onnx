@@ -3,11 +3,15 @@
 [![Paper](https://img.shields.io/badge/Paper-arXiv%3A1234.56789-b31b1b.svg)](https://arxiv.org/abs/2409.16294)
 [![Website](https://img.shields.io/badge/Project%20Page-Link-blue)](https://gencad.github.io/)
 
+<p align="center">
+  <img src="assets/fig_10.png" alt="GenCAD Demo" width="700"/>
+</p>
+
 ---
 
 ## Dataset 
 
-The dataset for GenCAD can be downloaded from [here](https://drive.google.com/drive/folders/1M0dPr5kILGY9HTRCHox1vLLDhhxJWl_C?usp=sharing) and place it in the data directory. 
+The dataset for GenCAD can be downloaded from [here](https://drive.google.com/drive/folders/1M0dPr5kILGY9HTRCHox1vLLDhhxJWl_C?usp=sharing) and should be placed in the data directory. 
 
 ## Pretrained models
 
