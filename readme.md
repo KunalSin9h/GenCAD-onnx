@@ -1,3 +1,10 @@
+# GenCAD: Image-conditioned Computer-Aided Design Generation with Transformer-based Contrastive Representation and Diffusion Priors
+
+[![Paper](https://img.shields.io/badge/Paper-arXiv%3A1234.56789-b31b1b.svg)](https://arxiv.org/abs/2409.16294)
+[![Website](https://img.shields.io/badge/Project%20Page-Link-blue)](https://gencad.github.io/)
+
+---
+
 ## Dataset 
 
 The dataset for GenCAD can be downloaded from [here](https://drive.google.com/drive/folders/1M0dPr5kILGY9HTRCHox1vLLDhhxJWl_C?usp=sharing) and place it in the data directory. 
