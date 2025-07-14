@@ -1,0 +1,13 @@
+torch
+torchvision
+transformers
+opencv-python
+scikit-learn
+x_clip
+ema_pytorch
+tensorboardX
+tensorboard
+einops
+h5py
+plyfile
+trimesh

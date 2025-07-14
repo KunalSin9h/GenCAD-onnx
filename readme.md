@@ -1,7 +1,21 @@
-# GenCAD: Image-conditioned Computer-Aided Design Generation with Transformer-based Contrastive Representation and Diffusion Priors
+<p align="center">
+  <h1 align="center">GenCAD</h1>
+  <h4 align="center">Image-conditioned Computer-Aided Design Generation with Transformer-based Contrastive Representation and Diffusion Priors</h4>
+</p>
 
-[![Paper](https://img.shields.io/badge/Paper-arXiv%3A1234.56789-b31b1b.svg)](https://arxiv.org/abs/2409.16294)
-[![Website](https://img.shields.io/badge/Project%20Page-Link-blue)](https://gencad.github.io/)
+<p align="center">
+  <a href="https://openreview.net/pdf?id=e817c1wEZ6">
+    <img src="https://img.shields.io/badge/Paper-TMLR%202025-4b44ce.svg">
+  </a>
+  <a href="https://arxiv.org/abs/2409.16294">
+    <img src="https://img.shields.io/badge/arXiv-2409.16294-b31b1b.svg">
+  </a>
+  <a href="https://gencad.github.io/">
+    <img src="https://img.shields.io/badge/Project%20Page-Link-blue">
+  </a>
+</p>
+
+---
 
 <p align="center">
   <img src="assets/fig_10.png" alt="GenCAD Demo" width="700"/>
@@ -9,47 +23,125 @@
 
 ---
 
-## Dataset 
+## 📁 Dataset 
 
-The dataset for GenCAD can be downloaded from [here](https://drive.google.com/drive/folders/1M0dPr5kILGY9HTRCHox1vLLDhhxJWl_C?usp=sharing) and should be placed in the data directory. 
+Download from [here](https://drive.google.com/drive/folders/1M0dPr5kILGY9HTRCHox1vLLDhhxJWl_C?usp=sharing) and place it in the `data/` directory. 
 
-## Pretrained models
+---
 
-Pretrained models can be found [here](https://drive.google.com/drive/folders/1Ej7wdtlqT5P-SoUf3gsZXD8b78XqhiI5?usp=sharing) and should be placed in the `data/ckpt` directory. 
+## 📦 Pretrained Models
 
-## Training the CSR model 
+Download from [here](https://drive.google.com/drive/folders/1Ej7wdtlqT5P-SoUf3gsZXD8b78XqhiI5?usp=sharing) and place them in `data/ckpt/`.
 
-Run the following command to train the CSR model  from scratch. If you want to start with a checkpoint just add the `-ckpt` flag with the path, e.g. `-ckpt "model/ckpt/ae_ckpt_epoch1000.pth"`. 
+---
 
- ```python train_gencad.py csr -name test -gpu 0```
+## 🔧 Setup Options
 
-## Training the CCIP model 
+First download the checkpoints and the dataset and put them in their respective directories. 
 
-Run the following command to train the CSR model  from scratch. If you want to start with a checkpoint just add the `-ckpt` flag with the path, e.g. `-ckpt "model/ckpt/ae_ckpt_epoch1000.pth"`. Note that you must provide the pretrained cad autoencoder (csr model) checkpoint which is kept frozen during the image encoder training. 
+### Option 1: Docker (Recommended)
 
- ```python train_gencad.py ccip -name test -gpu 0 -cad_ckpt "model/ckpt/ae_ckpt_epoch1000.pth"```
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/ferdous-alam/GenCAD
+   cd GenCAD
+   ```
+
+2. Build the Docker image:
+   ```bash
+   docker build -t gencad:latest .
+   ```
+
+3. Run a script, for example training CSR:
+   ```bash
+   docker run -it gencad:latest conda run -n gencad_env python train_gencad.py csr -name test -gpu 0
+   ```
+4. For headless visualization (inference):
+
+   First, enter the container with GPU access and mount the appropriate folders:
+
+   ```bash
+   docker run --gpus all \
+     -v $(pwd)/data/images:/app/data/images \
+     -v $(pwd)/assets:/app/assets \
+     -v $(pwd)/results:/app/results \
+     -it gencad:latest /bin/bash
+   ```
+
+   Then inside the container, run:
+
+   ```bash
+   xvfb-run --server-args="-screen 0 2048x2048x24" python inference_gencad.py -image_path data/images -export_img
+   ```
+---
+
+### Option 2: Manual (conda + pip)
 
 
-## Training the Diffusion Prior model 
+1. Create and activate a virtual environment with GPU support:
+   ```bash
+   conda create -n gencad_env python=3.10 -y
+   conda activate gencad_env
 
-Run the following command to train the DP model from scratch. Note that you must provide the image embeddings and cad embeddings to train the DP model. These embeddings are obtained by passing the entire training dataset through the pretrained image encoder and cad encoder respectively. 
+2. Install `pythonocc-core` using conda:
+   ```bash
+   conda install -c conda-forge pythonocc-core=7.9.0
+   ```
 
-``` python train_gencad.py dp -name test -gpu 0 -cad_emb 'data/embeddings/cad_embeddings.h5' -img_emb 'data/embeddings/sketch_embeddings.h5'```
+3. Install the rest via pip:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## Inference 
+4. Now run training or inference:
+   ```bash
+   python train_gencad.py csr -name test -gpu 0
+   ```
 
-Running the inference code will generate CAD and you can save the CAD as STL or STEP or image. To get images in a headless way, please use `xvfb-run` infront of the main code. The inference code is very straightforward and easy to modify. 
+---
 
-```xvfb-run python inference_gencad.py```
+## 🚀 Training
 
-## Evaluation 
+### CSR Model
+```bash
+python train_gencad.py csr -name test -gpu 0
+```
+Optional checkpoint:
+```bash
+python train_gencad.py csr -name test -gpu 0 -ckpt "model/ckpt/ae_ckpt_epoch1000.pth"
+```
 
-will be updated soon. 
+### CCIP Model
+```bash
+python train_gencad.py ccip -name test -gpu 0 -cad_ckpt "model/ckpt/ae_ckpt_epoch1000.pth"
+```
 
-## Visualization 
+### Diffusion Prior
+```bash
+python train_gencad.py dp -name test -gpu 0 -cad_emb 'data/embeddings/cad_embeddings.h5' -img_emb 'data/embeddings/sketch_embeddings.h5'
+```
 
-We provide a simple script to visualize any STL file using OPENCASCADE and save the image in `.png` format. Just run the following code or modify as you want. 
+---
 
-```python stl2img.py -src path/to/stl/files -dst path/to/save/images```
+## 🧪 Inference
 
+For headless systems (e.g. servers):
 
+```bash
+xvfb-run python inference_gencad.py
+```
+
+---
+
+## 🖼 STL Visualization
+
+Convert STL to PNG:
+```bash
+python stl2img.py -src path/to/stl/files -dst path/to/save/images
+```
+
+---
+
+## 📊 Evaluation
+
+Coming soon.

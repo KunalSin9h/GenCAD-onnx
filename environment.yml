@@ -1,0 +1,21 @@
+name: gencad_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pythonocc-core=7.9.0
+  - pip
+  - pip:
+      - torch
+      - torchvision
+      - transformers
+      - opencv-python
+      - scikit-learn
+      - x_clip
+      - ema_pytorch
+      - tensorboardX
+      - tensorboard
+      - einops
+      - h5py
+      - plyfile
+      - trimesh

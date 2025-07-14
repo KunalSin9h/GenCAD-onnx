@@ -264,11 +264,17 @@ def main(img_dir, export_stl=False, export_img=False):
                 os.makedirs(os.path.join(img_dir, "stls"), exist_ok=True) 
                 export_path = img_dir + "/stls/" + f"{img_name}.stl"
                 write_stl_file(shape, export_path, mode="binary", linear_deflection=0.5, angular_deflection=0.3,)
-
         except:
             print("cannot find EOS") 
 
 
 if __name__ == "__main__":
-    image_path = 'path/to/your/image_directory'  
-    main(image_path, export_stl=False, export_img=True)
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-image_path", type=str, required=True)
+    parser.add_argument("-export_stl", action="store_true")
+    parser.add_argument("-export_img", action="store_true")
+    args = parser.parse_args()
+
+    main(args.image_path, export_stl=args.export_stl, export_img=args.export_img)
