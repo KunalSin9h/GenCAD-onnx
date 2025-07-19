@@ -11,3 +11,6 @@ data/test_images/
 !data/test_images/00010085_0.png
 
 model/ckpt
+
+venv
+.venv
