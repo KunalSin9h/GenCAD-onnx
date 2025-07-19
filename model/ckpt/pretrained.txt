@@ -1,1 +1,1 @@
-download the pretrained models here.
+download the pretrained models checkpoints here.
