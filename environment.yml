@@ -3,7 +3,8 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - pythonocc-core=7.9.0
+  - libtiff=4.5.1
+  - pythonocc-core=7
   - pip
   - pip:
       - torch

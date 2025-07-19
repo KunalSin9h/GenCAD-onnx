@@ -1,0 +1,13 @@
+**/*.pyc
+**/pycache/
+**/log/
+
+data/images
+data/sketches
+data/embeddings
+data/cad_vec
+data/test_images/
+!data/test_images/00010010_0.png
+!data/test_images/00010085_0.png
+
+model/ckpt
