@@ -138,7 +138,7 @@ def main(img_dir, export_stl=False, export_img=False):
     ########################################
     ########################################
 
-    # checkpoints 
+    # Model Checkpoints 
 
     cad_ckpt_path = "model/ckpt/ae_ckpt_epoch1000.pth"
     clip_ckpt_path = "model/ckpt/ccip_sketch_ckpt_epoch300.pth"
