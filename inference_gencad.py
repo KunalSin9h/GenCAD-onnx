@@ -140,9 +140,9 @@ def main(img_dir, export_stl=False, export_img=False):
 
     # Model Checkpoints 
 
+    diffusion_ckpt_path = 'model/ckpt/sketch_cond_diffusion_ckpt_epoch1000000.pt'
     cad_ckpt_path = "model/ckpt/ae_ckpt_epoch1000.pth"
     clip_ckpt_path = "model/ckpt/ccip_sketch_ckpt_epoch300.pth"
-    diffusion_ckpt_path = 'model/ckpt/sketch_cond_diffusion_ckpt_epoch1000000.pt'
 
     # model params
 
@@ -150,9 +150,8 @@ def main(img_dir, export_stl=False, export_img=False):
                         "dropout_first": 0.1, "dropout_second": 0.1, "d_out": 256}
 
     # device
-
     device_num = 0
-    device = torch.device(f"cuda:{device_num}")
+    device = torch.device(f"cuda:{device_num}" if torch.cuda.is_available() else "cpu")
     phase = "test"
     batch_size = 64
 
@@ -211,7 +210,7 @@ def main(img_dir, export_stl=False, export_img=False):
 
     cad_decoder = VanillaCADTransformer(config).to(config.device) 
 
-    cad_ckpt = torch.load(cad_ckpt_path)
+    cad_ckpt = torch.load(cad_ckpt_path, map_location=device)
     cad_decoder.load_state_dict(cad_ckpt['model_state_dict'])
     cad_decoder.eval()
 
