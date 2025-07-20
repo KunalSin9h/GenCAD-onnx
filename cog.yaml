@@ -1,0 +1,30 @@
+# Configuration for Cog ⚙️
+# Reference: https://cog.run/yaml
+
+build:
+  gpu: false
+
+  # a list of ubuntu apt packages to install
+  system_packages:
+    - xvfb
+    - libgl1
+    - libxrender1
+    - libsm6
+    - libxext6
+    - mesa-utils
+    - fonts-dejavu-core
+    - x11-utils
+
+  # python version in the form '3.11' or '3.11.4'
+  python_version: "3.10"
+
+  # path to a Python requirements.txt file
+  python_requirements: requirements.txt
+
+  # commands run after the environment is setup
+  # run:
+  #   - "echo env is ready!"
+  #   - "echo another command if needed"
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
